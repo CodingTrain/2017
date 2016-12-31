@@ -17,7 +17,7 @@ function setup() {
   createCanvas(1200, 600);
   createButton('toggle paths').mousePressed(debugIt);
   var options = {
-    sampleFactor: 0.01,
+    sampleFactor: 0.02,
   };
   var fsize = 512;
   var txt = '2017';
@@ -45,13 +45,22 @@ function setup() {
     xoff += glyphs[i].advanceWidth * font._scale(fsize);
   }
 
+  vpaths.splice(2, 1);
+
 
 }
 
+var index = 0;
+
 function draw() {
 
-  if (vehicles.length < 500) {
-    newVehicle(random(width), random(height));
+  if (frameCount % 3 == 0) {
+    if (vehicles.length < 200) {
+      newVehicle();
+    } else {
+      vehicles[index].whichPath = (vehicles[index].whichPath + 1) % vpaths.length;
+      index = (index + 1) % vehicles.length;
+    }
   }
 
   background(0);
@@ -72,10 +81,10 @@ function draw() {
 
 }
 
-function newVehicle(x, y) {
-  var maxspeed = random(2, 4);
-  var maxforce = 0.3;
-  var whichP = random(vpaths);
-  var start = random(whichP.points);
+function newVehicle() {
+  var maxspeed = random(2, 8);
+  var maxforce = random(0.2, 1);
+  var whichP = 0;
+  var start = random(vpaths[0].points);
   vehicles.push(new Vehicle(start.x, start.y, maxspeed, maxforce, whichP));
 }

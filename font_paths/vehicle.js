@@ -19,7 +19,7 @@ function Vehicle(x, y, ms, mf, wp) {
 // Using global variables
 Vehicle.prototype.applyBehaviors = function() {
   // Follow path force
-  var f = this.follow(this.whichPath);
+  var f = this.follow(vpaths[this.whichPath]);
   // Separate from other boids force
   var s = this.separate(vehicles);
   // Arbitrary weighting

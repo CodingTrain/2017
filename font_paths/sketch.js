@@ -47,15 +47,15 @@ function setup() {
 
   vpaths.splice(2, 1);
 
-
+  background(0);
 }
 
 var index = 0;
 
 function draw() {
 
-  if (frameCount % 3 == 0) {
-    if (vehicles.length < 200) {
+  if (frameCount % 5 == 0) {
+    if (vehicles.length < 120) {
       newVehicle();
     } else {
       vehicles[index].whichPath = (vehicles[index].whichPath + 1) % vpaths.length;

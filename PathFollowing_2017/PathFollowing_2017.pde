@@ -21,13 +21,14 @@ Table table;
 
 PImage texture;
 
-int totalParticles = 1500;
+int totalParticles = 1000;
 int often = 60;
 
 void setup() {
   size(1280, 720, P2D);
+  frameRate(60);
   blendMode(ADD);
-  pixelDensity(2);
+  //pixelDensity(2);
   // Call a function to generate new Path object
   newPath();
   table = loadTable("paths.csv");
@@ -71,7 +72,7 @@ void draw() {
     v.run();
     v.applyBehaviors(vehicles, paths);
   }
-  saveFrame("output/render####.png");
+  //saveFrame("output/render####.png");
 }
 
 void newPath() {

@@ -52,7 +52,7 @@ class Vehicle {
 
   // Main "run" function
   public void run() {
-    if (counter % (totalParticles/(paths.length-1)) == 0) {
+    if (counter % (totalParticles/(paths.length-2)) == 0) {
       whichPath = whichPath + dir;
       if (whichPath == paths.length-1) dir = -1;
       else if (whichPath == 0) dir = 1;

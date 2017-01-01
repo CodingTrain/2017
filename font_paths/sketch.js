@@ -30,6 +30,7 @@ function setup() {
 
   var glyphs = font._getGlyphs(txt);
   var xoff = 0;
+  var counter = 0;
   for (var i = 0; i < glyphs.length; i++) {
     var gpath = glyphs[i].getPath(x, y, fsize);
     var paths = splitPaths(gpath.commands);
@@ -39,7 +40,10 @@ function setup() {
       for (var k = 0; k < pts.length; k++) {
         pts[k].x += xoff;
         vpath.addPoint(pts[k].x, pts[k].y);
+
+        console.log(counter + ',' + pts[k].x + ',' + pts[k].y);
       }
+      counter++;
       vpaths.push(vpath);
     }
     xoff += glyphs[i].advanceWidth * font._scale(fsize);

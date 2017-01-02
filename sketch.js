@@ -18,6 +18,9 @@ function preload() {
 function setup() {
   createCanvas(900, 400);
   txt.loadPixels();
+
+  fill(random (0, 255), random (0, 255), random (0, 255));
+
   for (var x = 0; x < txt.width; x++) {
     for (var y = 0; y < txt.height; y++) {
       var index = (x + y * txt.width) * 4
@@ -35,7 +38,6 @@ function draw() {
   for (var i = 0; i < circles.length; i++) {
     var c = circles[i];
     c.show();
-
     // Is it a growing one?
     if (c.growing) {
       c.grow();
@@ -86,6 +88,9 @@ function addCircle() {
   var index = floor(random(spots.length));
   var spot = spots[index];
   var newCircle = new Circle(spot.x, spot.y, 1);
+
+
+
   // Is it in an ok spot?
   for (var i = 0; i < circles.length; i++) {
     var other = circles[i];
@@ -97,6 +102,7 @@ function addCircle() {
   }
   // If it is, add it
   if (newCircle != null) {
+
     circles.push(newCircle);
     return true;
   } else {
@@ -116,7 +122,6 @@ function Circle(x, y, r) {
   this.edges = function() {
     return (this.r > width - this.x || this.r > this.x || this.r > height - this.y || this.r > this.y);
   }
-
   // Grow
   this.grow = function() {
     this.r += 0.5;
@@ -125,7 +130,6 @@ function Circle(x, y, r) {
   // Show
   this.show = function() {
     stroke(255);
-    noFill();
     strokeWeight(2);
     ellipse(this.x, this.y, this.r * 2, this.r * 2);
   }

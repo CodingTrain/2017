@@ -3,18 +3,17 @@
 // Expansion of: https://youtu.be/XATr_jdh-44
 // Daniel Shiffman
 // http://codingrainbow.com/
-
 // All the circles
 var circles = [];
 var circles = [];
 var spots = [];
-
 var txt;
-
+//change this to load your own png
+// full path might be necessary
+//big white strokes works best for the rendering
 function preload() {
   txt = loadImage("data/2017.png");
 }
-
 function setup() {
   createCanvas(900, 400);
   txt.loadPixels();
@@ -23,15 +22,17 @@ function setup() {
 
   for (var x = 0; x < txt.width; x++) {
     for (var y = 0; y < txt.height; y++) {
+      //value of 1 fills the whole frame with circles
+      // value of 10 more or less complies with text shape but no detail at all
       var index = (x + y * txt.width) * 4
       var rVal = txt.pixels[index];
+      //not seeing any change when whacking out this number
       if (rVal > 10) {
         spots.push(createVector(x, y));
       }
     }
   }
 }
-
 function draw() {
   background(0);
   // All the circles
@@ -51,25 +52,23 @@ function draw() {
           }
         }
       }
-
       // Is it stuck to an edge?
       if (c.growing) {
         c.growing = !c.edges();
       }
     }
   }
-
   // Let's try to make a certain number of new circles each frame
   // More the longer it has been running
   var target = 1; // + constrain(frameCount / 120, 0, 20);
   var count = 0;
   // Try N times
+  //reduce this number and get fewer circles
   for (var i = 0; i < 2000; i++) {
     if (addCircle()) {
       count++;
     }
     // We made enough
-
     if (count == target) {
       break;
     }
@@ -80,9 +79,7 @@ function draw() {
     console.log("finished");
   }
 }
-
 // Add one circle
-
 function addCircle() {
   // Here's a new circle
   var index = floor(random(spots.length));
@@ -109,27 +106,26 @@ function addCircle() {
     return false;
   }
 }
-
-
-
 function Circle(x, y, r) {
   this.growing = true;
   this.x = x;
   this.y = y;
   this.r = r;
-
   // Check stuck to an edge
   this.edges = function() {
     return (this.r > width - this.x || this.r > this.x || this.r > height - this.y || this.r > this.y);
   }
   // Grow
+  //this will change the size of the circles
+  //.01 is small
   this.grow = function() {
     this.r += 0.5;
   }
-
   // Show
   this.show = function() {
     stroke(255);
+    //this will change the line width of the circ.
+    // fractions will make the circles very faint
     strokeWeight(2);
     ellipse(this.x, this.y, this.r * 2, this.r * 2);
   }

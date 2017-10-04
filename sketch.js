@@ -17,6 +17,9 @@ function preload() {
 function setup() {
   createCanvas(900, 400);
   txt.loadPixels();
+
+  fill(random (0, 255), random (0, 255), random (0, 255));
+
   for (var x = 0; x < txt.width; x++) {
     for (var y = 0; y < txt.height; y++) {
       //value of 1 fills the whole frame with circles
@@ -82,6 +85,9 @@ function addCircle() {
   var index = floor(random(spots.length));
   var spot = spots[index];
   var newCircle = new Circle(spot.x, spot.y, 1);
+
+
+
   // Is it in an ok spot?
   for (var i = 0; i < circles.length; i++) {
     var other = circles[i];
@@ -93,6 +99,7 @@ function addCircle() {
   }
   // If it is, add it
   if (newCircle != null) {
+
     circles.push(newCircle);
     return true;
   } else {
@@ -117,7 +124,6 @@ function Circle(x, y, r) {
   // Show
   this.show = function() {
     stroke(255);
-    noFill();
     //this will change the line width of the circ.
     // fractions will make the circles very faint
     strokeWeight(2);

@@ -12,16 +12,16 @@ var txt;
 // full path might be necessary
 //big white strokes works best for the rendering
 function preload() {
-  txt = loadImage("/2017.png");
+  txt = loadImage("data/2017.png");
 }
 function setup() {
-  createCanvas(900, 600);
+  createCanvas(900, 400);
   txt.loadPixels();
   for (var x = 0; x < txt.width; x++) {
     for (var y = 0; y < txt.height; y++) {
       //value of 1 fills the whole frame with circles
       // value of 10 more or less complies with text shape but no detail at all
-      var index = (x + y * txt.width) * 10
+      var index = (x + y * txt.width) * 4
       var rVal = txt.pixels[index];
       //not seeing any change when whacking out this number
       if (rVal > 10) {
@@ -61,7 +61,7 @@ function draw() {
   var count = 0;
   // Try N times
   //reduce this number and get fewer circles
-  for (var i = 0; i < 5; i++) {
+  for (var i = 0; i < 2000; i++) {
     if (addCircle()) {
       count++;
     }
@@ -112,7 +112,7 @@ function Circle(x, y, r) {
   //this will change the size of the circles
   //.01 is small
   this.grow = function() {
-    this.r += 0.1;
+    this.r += 0.5;
   }
   // Show
   this.show = function() {
@@ -120,7 +120,7 @@ function Circle(x, y, r) {
     noFill();
     //this will change the line width of the circ.
     // fractions will make the circles very faint
-    strokeWeight(.1);
+    strokeWeight(2);
     ellipse(this.x, this.y, this.r * 2, this.r * 2);
   }
 }
